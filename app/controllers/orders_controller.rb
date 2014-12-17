@@ -11,4 +11,8 @@ class OrdersController < ApplicationController
       redirect_to order_path(order_form.order.number)
     end
   end
+
+  def method_name
+
+  end
 end

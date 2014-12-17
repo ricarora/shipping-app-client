@@ -7,5 +7,13 @@ class CartController < ApplicationController
   end
 
   def show
+    @weight = total_weight
+    response = HTTParty.get("http://shipping-rates-client.herokuapp.com/shipments/new?[shipment]name=#{current_order.address.name}&[shipment]city=#{current_order.address.city}&[shipment]state=#{current_order.address.state}&[shipment]postal_code=#{current_order.address.postal_code}&[shipment]weight=#{total_weight}").parsed_response
+    raise
+  end
+
+private
+  def total_weight
+    current_order.items.inject(0) {|sum, item| sum += (item.product.weight * item.quantity) }
   end
 end
