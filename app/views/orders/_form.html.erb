@@ -35,7 +35,18 @@
     <div class='col-lg-5'>
       <h4 class='brand'>Shipping Option</h4>
       <div class='shipping-options well'>
-        <span class='brand'>:( Please implement me</span>
+        <span class='brand'>
+          <% @shipping.each do |carrier| %>
+              <% carrier.each do |quote| %>
+                <div class="shipping-quote">
+                  <%= quote["service_name"] %>
+                  <%= quote["total_price"] / 100.0 %>
+                  <%= quote["currency"] %>
+                </div>
+
+              <% end %>
+          <% end %>
+          </span>
       </div>
       <%= f.submit "Checkout", class: "btn btn-success btn-block" %>
     </div>
