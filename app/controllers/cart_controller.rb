@@ -10,7 +10,7 @@ class CartController < ApplicationController
     @weight = total_weight
     if current_order.address
       response = HTTParty.get("http://shipping-rates-client.herokuapp.com/shipments/new?[shipment]name=#{current_order.address.name}&[shipment]city=#{current_order.address.city}&[shipment]state=#{current_order.address.state}&[shipment]postal_code=#{current_order.address.postal_code}&[shipment]weight=#{total_weight}").parsed_response
-      @shipping = response
+      @shipping = response.flatten.sort{|a,b| a["total_price"]<=>b["total_price"]}
     end
   end
 

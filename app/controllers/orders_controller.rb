@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
   end
 
   def update
-    order_form = OrderForm.new(current_order, params[:order])
+    order_form = OrderForm.new(current_order, params[:order], params[:order][:shipping_option])
     if order_form.save
       session[:order_number] = nil
       redirect_to order_path(order_form.order.number)

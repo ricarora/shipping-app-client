@@ -33,14 +33,15 @@
     </div>
 
     <div class='col-lg-5'>
-      <h4 class='brand'>Shipping Option</h4>
+      <h4 class='brand'>Shipping Option(Click one to select)</h4>
       <div class='shipping-options well'>
         <span class='brand'>
-          <% @shipping.flatten.sort{|a,b| a["total_price"]<=>b["total_price"]}.each do |quote| %>
+          <% @shipping.each do |quote| %>
               <div class="shipping-quote">
+                <%= f.radio_button :shipping_option, [quote["service_name"],"price",quote["total_price"]], :shipping_price => quote["total_price"] %>
                 <%= quote["service_name"] %>
-                <%= quote["total_price"] / 100.0 %>
-                <%= quote["currency"] %>
+                <strong><%= quote["total_price"] / 100.0 %></strong>
+                <strong><%= quote["currency"] %></strong>
               </div>
           <% end %>
           </span>
