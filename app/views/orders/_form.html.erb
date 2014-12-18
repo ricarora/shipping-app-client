@@ -36,15 +36,12 @@
       <h4 class='brand'>Shipping Option</h4>
       <div class='shipping-options well'>
         <span class='brand'>
-          <% @shipping.each do |carrier| %>
-              <% carrier.each do |quote| %>
-                <div class="shipping-quote">
-                  <%= quote["service_name"] %>
-                  <%= quote["total_price"] / 100.0 %>
-                  <%= quote["currency"] %>
-                </div>
-
-              <% end %>
+          <% @shipping.flatten.sort{|a,b| a["total_price"]<=>b["total_price"]}.each do |quote| %>
+              <div class="shipping-quote">
+                <%= quote["service_name"] %>
+                <%= quote["total_price"] / 100.0 %>
+                <%= quote["currency"] %>
+              </div>
           <% end %>
           </span>
       </div>
