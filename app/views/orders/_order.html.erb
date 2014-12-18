@@ -9,5 +9,10 @@
         <td><%= item.total.format %></td>
       </tr>
     <% end %>
+    <% if order.shipping_option %>
+      <tr>
+        <td colspan="2"><%= order.shipping_option %></td><td>$<%= order.shipping_price / 100.0 %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
